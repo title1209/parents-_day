@@ -1,3 +1,77 @@
+// 이미지 업로드 함수
+        function uploadImage(event) {
+            const file = event.target.files[0];
+
+            if (file) {
+                // 파일을 base64로 변환
+                const reader = new FileReader();
+                reader.onloadend = function() {
+                    const imageData = reader.result; // base64 이미지 데이터
+                    localStorage.setItem("uploadedImage", imageData); // 로컬 스토리지에 저장
+                    displayImage(imageData); // 이미지 표시
+                };
+                reader.readAsDataURL(file); // 파일을 base64로 읽음
+            }
+        }
+
+        // 로컬 스토리지에서 이미지 가져오기 및 표시
+        function loadImage() {
+            const savedImage = localStorage.getItem("uploadedImage");
+            if (savedImage) {
+                displayImage(savedImage);
+            }
+        }
+
+        // 이미지 표시 함수
+        function displayImage(imageData) {
+            const container = document.getElementById("uploaded-image-container");
+            container.innerHTML = ''; // 기존 이미지 삭제
+            const img = document.createElement("img");
+            img.src = imageData;
+            img.alt = "Uploaded Image";
+            img.style.maxWidth = "500px"; // 이미지 크기 제한
+            container.appendChild(img);
+        }
+
+        // 페이지 로드 시 이미지 표시
+        window.onload = loadImage;// 이미지 업로드 함수
+        function uploadImage(event) {
+            const file = event.target.files[0];
+
+            if (file) {
+                // 파일을 base64로 변환
+                const reader = new FileReader();
+                reader.onloadend = function() {
+                    const imageData = reader.result; // base64 이미지 데이터
+                    localStorage.setItem("uploadedImage", imageData); // 로컬 스토리지에 저장
+                    displayImage(imageData); // 이미지 표시
+                };
+                reader.readAsDataURL(file); // 파일을 base64로 읽음
+            }
+        }
+
+        // 로컬 스토리지에서 이미지 가져오기 및 표시
+        function loadImage() {
+            const savedImage = localStorage.getItem("uploadedImage");
+            if (savedImage) {
+                displayImage(savedImage);
+            }
+        }
+
+        // 이미지 표시 함수
+        function displayImage(imageData) {
+            const container = document.getElementById("uploaded-image-container");
+            container.innerHTML = ''; // 기존 이미지 삭제
+            const img = document.createElement("img");
+            img.src = imageData;
+            img.alt = "Uploaded Image";
+            img.style.maxWidth = "500px"; // 이미지 크기 제한
+            container.appendChild(img);
+        }
+
+        // 페이지 로드 시 이미지 표시
+        window.onload = loadImage;
+
 // 방명록 저장 함수
 function saveGuestbook() {
     const name = document.getElementById("name").value;
