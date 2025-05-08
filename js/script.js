@@ -1,130 +1,81 @@
-// 이미지 업로드 함수
-        function uploadImage(event) {
+$(function() {
+    $(".gallery input[type='file']").each(function(index) {
+        const $input = $(this);
+        const $parent = $input.parent();
+        const $img = $('<img>', { alt: '이미지' }).css({
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            borderRadius: '10px',
+            cursor: 'pointer',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            display: 'none'
+        });
+
+        $parent.prepend($img);
+
+        const storageKey = 'gallery_image_' + index;
+
+        // 저장된 이미지 불러오기
+        const savedImage = localStorage.getItem(storageKey);
+        if (savedImage) {
+            $img.attr('src', savedImage).show();
+            $input.hide();
+        }
+
+        $img.on('click', function() {
+            $input.click();
+        });
+
+        $input.on('change', function(event) {
             const file = event.target.files[0];
-
-            if (file) {
-                // 파일을 base64로 변환
+            if (file && file.type.startsWith('image/')) {
                 const reader = new FileReader();
-                reader.onloadend = function() {
-                    const imageData = reader.result; // base64 이미지 데이터
-                    localStorage.setItem("uploadedImage", imageData); // 로컬 스토리지에 저장
-                    displayImage(imageData); // 이미지 표시
+                reader.onload = function(e) {
+                    const imageData = e.target.result;
+                    $img.attr('src', imageData).show();
+                    $input.hide();
+                    localStorage.setItem(storageKey, imageData); // 저장
                 };
-                reader.readAsDataURL(file); // 파일을 base64로 읽음
+                reader.readAsDataURL(file);
+            } else {
+                alert('이미지 파일을 선택해주세요!');
             }
-        }
-
-        // 로컬 스토리지에서 이미지 가져오기 및 표시
-        function loadImage() {
-            const savedImage = localStorage.getItem("uploadedImage");
-            if (savedImage) {
-                displayImage(savedImage);
-            }
-        }
-
-        // 이미지 표시 함수
-        function displayImage(imageData) {
-            const container = document.getElementById("uploaded-image-container");
-            container.innerHTML = ''; // 기존 이미지 삭제
-            const img = document.createElement("img");
-            img.src = imageData;
-            img.alt = "Uploaded Image";
-            img.style.maxWidth = "500px"; // 이미지 크기 제한
-            container.appendChild(img);
-        }
-
-        // 페이지 로드 시 이미지 표시
-        window.onload = loadImage;// 이미지 업로드 함수
-        function uploadImage(event) {
-            const file = event.target.files[0];
-
-            if (file) {
-                // 파일을 base64로 변환
-                const reader = new FileReader();
-                reader.onloadend = function() {
-                    const imageData = reader.result; // base64 이미지 데이터
-                    localStorage.setItem("uploadedImage", imageData); // 로컬 스토리지에 저장
-                    displayImage(imageData); // 이미지 표시
-                };
-                reader.readAsDataURL(file); // 파일을 base64로 읽음
-            }
-        }
-
-        // 로컬 스토리지에서 이미지 가져오기 및 표시
-        function loadImage() {
-            const savedImage = localStorage.getItem("uploadedImage");
-            if (savedImage) {
-                displayImage(savedImage);
-            }
-        }
-
-        // 이미지 표시 함수
-        function displayImage(imageData) {
-            const container = document.getElementById("uploaded-image-container");
-            container.innerHTML = ''; // 기존 이미지 삭제
-            const img = document.createElement("img");
-            img.src = imageData;
-            img.alt = "Uploaded Image";
-            img.style.maxWidth = "500px"; // 이미지 크기 제한
-            container.appendChild(img);
-        }
-
-        // 페이지 로드 시 이미지 표시
-        window.onload = loadImage;
-
-// 방명록 저장 함수
-function saveGuestbook() {
-    const name = document.getElementById("name").value;
-    const message = document.getElementById("message").value;
-    
-    if (name && message) {
-        const guestbook = {
-            name: name,
-            message: message
-        };
-
-        // 로컬 스토리지에 방명록 데이터 저장
-        let guestbookData = JSON.parse(localStorage.getItem("guestbookData")) || [];
-        guestbookData.push(guestbook);
-        localStorage.setItem("guestbookData", JSON.stringify(guestbookData));
-
-        // 폼 초기화
-        document.getElementById("guestbook-form").reset();
-        loadGuestbook();
-    }
-}
-
-// 방명록 데이터 로드 함수
-function loadGuestbook() {
-    const guestbookData = JSON.parse(localStorage.getItem("guestbookData")) || [];
-    const guestbookList = document.getElementById("guestbook-list");
-    guestbookList.innerHTML = "";
-
-    guestbookData.forEach((entry, index) => {
-        const listItem = document.createElement("li");
-
-        // 방명록 내용 표시
-        listItem.textContent = `${entry.name}: ${entry.message} `;
-
-        // 삭제 버튼 생성
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "삭제";
-        deleteButton.onclick = function() {
-            deleteGuestbookEntry(index);
-        };
-
-        listItem.appendChild(deleteButton);
-        guestbookList.appendChild(listItem);
+        });
     });
-}
+});
 
-// 방명록 항목 삭제 함수
-function deleteGuestbookEntry(index) {
-    let guestbookData = JSON.parse(localStorage.getItem("guestbookData")) || [];
-    guestbookData.splice(index, 1);  // 해당 인덱스의 방명록 항목 삭제
-    localStorage.setItem("guestbookData", JSON.stringify(guestbookData));  // 업데이트된 데이터 로컬 스토리지에 저장
-    loadGuestbook();  // 방명록 다시 로드
-}
+$(function() {
+    const $form = $('#guestbook-form');
+    const $name = $('#guestbook-name');
+    const $message = $('#guestbook-message');
+    const $list = $('#guestbook-list');
 
-// 페이지 로드 시 방명록 불러오기
-window.onload = loadGuestbook;
+    function loadGuestbook() {
+        $list.empty();
+        const entries = JSON.parse(localStorage.getItem('guestbook')) || [];
+        entries.forEach(entry => {
+            const $li = $('<li>').html(`<strong>${entry.name}</strong>: ${entry.message}`);
+            $list.append($li);
+        });
+    }
+
+    $form.on('submit', function(e) {
+        e.preventDefault();
+        const name = $name.val().trim();
+        const message = $message.val().trim();
+        if (!name || !message) return;
+
+        const entries = JSON.parse(localStorage.getItem('guestbook')) || [];
+        entries.push({ name, message });
+        localStorage.setItem('guestbook', JSON.stringify(entries));
+
+        $name.val('');
+        $message.val('');
+        loadGuestbook();
+    });
+
+    loadGuestbook();
+});
