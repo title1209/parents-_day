@@ -1,0 +1,141 @@
+@charset "UTF-8";
+/* CSS Document */
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #FFFACD;
+}
+
+ul, ol, li {
+    list-style-type: none;
+}
+
+#all {
+    position: relative;
+}
+
+header {
+    background-color: #A7FC00;
+    color: #fff;
+    padding: 10px 0;
+    box-shadow: rgba(95, 95, 95, 0.116) 0px 10px 12px 6px;
+}
+
+header > div > nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: center;
+}
+
+main {
+    text-align: center;
+}
+
+main > section {
+    padding: 20px 0px;
+    margin-bottom: 0px;
+}
+
+.gallery {
+    position: relative;
+    height:800px;
+    background-image: url("../assets/image/image_board.png");
+}
+
+.image {
+    position: absolute;
+    width: 320px;
+    height: 200px;
+}
+
+.image input[type='file'],
+.image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.image input[type='file'] {
+    background-color: #ffffffcc; /* 반투명 배경 */
+    padding: 0;
+    cursor: pointer;
+}
+
+.image img {
+    display: none;
+    cursor: pointer;
+}
+
+
+.image:nth-child(1) {
+    top:60px;
+    left:100px;
+    rotate: -15deg;
+}
+
+.image:nth-child(2) {
+    top:100px;
+    left:800px;
+    rotate: 5deg;
+}
+
+.image:nth-child(3) {
+    top: 371px;
+    left: 393px;
+    rotate: -2.5deg;
+}
+
+.image:nth-child(4) {
+    top: 515px;
+    left: 986px;
+    rotate: 348deg;
+}
+
+#guestbook {
+    margin-top: 40px;
+    text-align: left;
+}
+
+#guestbook-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#guestbook-form input,
+#guestbook-form textarea {
+    width: 100%;
+}
+
+#guestbook-list {
+    margin-top: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+#guestbook-list li {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px;
+}
+
+
+footer {
+    position: relative;
+    background-color: #FFC0CB;
+    padding: 10px 0;
+    height: 30px;
+    box-sizing: content-box;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>어버이날</title>
+        <link rel="stylesheet" href="css/style.css" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"> <!-- pico.css -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery -->
+        <script type="text/javascript" src="js/script.js" defer></script>
+    </head>
+    <body>
+        <div id="all">
+            <header>
+                <div class="container">
+                    <nav>
+                        <ul>
+                            <li><strong>어버이날</strong></li>
+                        </ul>
+                        <ul>
+                            <li><a href="#home">홈</a></li>
+                            <li><a href="#about">개요</a></li>
+                            <li><a href="#gallery">갤러리</a></li>
+                            <li><a href="#guestbook">방명록</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+            <main class="container">
+                <section id="home">
+                    <h2>어버이날</h2>
+                    <p>이 사이트는 오직직 단 두 분만을 위한 사이트입니다.</p>
+                </section>
+                <section id="about">
+                    <h2>개요</h2>
+                    <p>어버이날은 매년 5월 8일에 기념되는 날로, 부모님께 감사의 마음을 전하는 날입니다.</p>
+                    <p>부모님께 사랑과 존경을 표현하고, 그들의 노고에 감사하는 의미를 담고 있습니다.</p>
+                    <p>어버이날에는 카네이션을 달아드리거나, 편지, 선물 등을 통해 마음을 전합니다.</p>
+                </section>
+                <section id="gallery">
+                    <h2>갤러리</h2>
+                    <form class="gallery">
+                        <div class="image">
+                            <input type="file" accept="image/*" name="image1" class="image">
+                            <figcaption></figcaption>
+                        </div>
+                        <div class="image">
+                            <input type="file" accept="image/*" name="image2" class="image">
+                            <figcaption></figcaption>
+                        </div>
+                        <div class="image">
+                            <input type="file" accept="image/*" name="image3" class="image">
+                            <figcaption></figcaption>
+                        </div>
+                        <div class="image">
+                            <input type="file" accept="image/*" name="image4" class="image">
+                            <figcaption></figcaption>
+                        </div>
+                    </form>
+                </section>
+                <section id="guestbook">
+                    <h2>방명록</h2>
+                    <form id="guestbook-form">
+                        <input type="text" id="guestbook-name" placeholder="이름" required>
+                        <textarea id="guestbook-message" placeholder="메시지" required></textarea>
+                        <button type="submit">남기기</button>
+                    </form>
+                    <ul id="guestbook-list"></ul>
+                </section>
+            </main>
+            <footer>
+                <div class="container">
+                    <p>&copy; 2025 김지혁</p>
+                </div>
+            </footer>
+        </div>
+    </body>
+</html>
